@@ -387,7 +387,50 @@ Press GET AI SIGNAL
 
 
 <div class="card">
+<div class="card">
 
+    <h3>📊 Live Candlestick Chart</h3>
+
+    <p style="color:#9ca9ba;">
+        View market movements and candlestick patterns.
+    </p>
+
+    <div
+        class="tradingview-widget-container"
+        style="height:450px;width:100%;"
+    >
+
+        <div
+            class="tradingview-widget-container__widget"
+            style="height:450px;width:100%;"
+        ></div>
+
+        <script
+            type="text/javascript"
+            src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js"
+            async
+        >
+        {
+            "autosize": true,
+            "symbol": "FX:USDJPY",
+            "interval": "1",
+            "timezone": "Etc/UTC",
+            "theme": "dark",
+            "style": "1",
+            "locale": "en",
+            "allow_symbol_change": true,
+            "hide_side_toolbar": true,
+            "withdateranges": true,
+            "details": false,
+            "hotlist": false,
+            "calendar": false,
+            "support_host": "https://www.tradingview.com"
+        }
+        </script>
+
+    </div>
+
+</div>
 <div class="stats">
 
 <div class="stat">
