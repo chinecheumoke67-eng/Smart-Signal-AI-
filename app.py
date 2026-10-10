@@ -3,7 +3,29 @@ import requests
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
+def send_telegram_message(message):
+    bot_token = os.environ.get("BOT_TOKEN")
+    chat_id = os.environ.get("CHAT_ID")
 
+    if not bot_token or not chat_id:
+        return False
+
+    url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+
+    try:
+        response = requests.post(
+            url,
+            json={
+                "chat_id": chat_id,
+                "text": message
+            },
+            timeout=10
+        )
+        response.raise_for_status()
+        return response.json().get("ok", False)
+    except Exception:
+        app.logger.exception("Telegram message failed")
+        return False
 
 def get_prices(symbol, interval):
     url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
@@ -651,7 +673,15 @@ def api_signal():
         )
 
         result = make_signal(prices)
-
+message = (
+    "🤖 SMART SIGNAL AI\n"
+    f"📊 Pair: {symbol}\n"
+    f"⏱️ Timeframe: {interval}\n"
+    f"📈 Signal: {result.get('signal', 'WAIT')}\n"
+    f"🎯 Confidence: {result.get('confidence', 'N/A')}%\n"
+    "⚠️ Signals are not guaranteed."
+)
+send_telegram_message(message)
         result["symbol"] = symbol
         result["interval"] = interval
 
