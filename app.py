@@ -674,13 +674,13 @@ def api_signal():
 
         result = make_signal(prices)
 message = (
-    "🤖 SMART SIGNAL AI\n"
-    f"📊 Pair: {symbol}\n"
-    f"⏱️ Timeframe: {interval}\n"
-    f"📈 Signal: {result.get('signal', 'WAIT')}\n"
-    f"🎯 Confidence: {result.get('confidence', 'N/A')}%\n"
-    "⚠️ Signals are not guaranteed."
-)
+                "🤖 SMART SIGNAL AI\n"
+                f"📊 Pair: {symbol}\n"
+                f"⏱️ Timeframe: {interval}\n"
+                f"📈 Signal: {result.get('signal', 'WAIT')}\n"
+                f"🎯 Confidence: {result.get('confidence', 'N/A')}%\n"
+                "⚠️ Signals are not guaranteed."
+            )
 send_telegram_message(message)
         result["symbol"] = symbol
         result["interval"] = interval
