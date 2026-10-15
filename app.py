@@ -671,29 +671,29 @@ def api_signal():
             symbol,
             interval
         )
+result = make_signal(prices)
 
-        result = make_signal(prices)
-message = (
-                "🤖 SMART SIGNAL AI\n"
-                f"📊 Pair: {symbol}\n"
-                f"⏱️ Timeframe: {interval}\n"
-                f"📈 Signal: {result.get('signal', 'WAIT')}\n"
-                f"🎯 Confidence: {result.get('confidence', 'N/A')}%\n"
-                "⚠️ Signals are not guaranteed."
+            message = (
+                "SMART SIGNAL AI\n"
+                f"Pair: {symbol}\n"
+                f"Timeframe: {interval}\n"
+                f"Signal: {result.get('signal', 'WAIT')}\n"
+                f"Confidence: {result.get('confidence', 'N/A')}%\n"
+                "Signals are not guaranteed."
             )
-send_telegram_message(message)
-        result["symbol"] = symbol
-        result["interval"] = interval
+            send_telegram_message(message)
 
-        return jsonify(result)
+            result["symbol"] = symbol
+            result["interval"] = interval
 
-    except Exception as e:
+            return jsonify(result)
 
-        return jsonify({
-            "signal": "WAIT",
-            "confidence": 0,
-            "error": str(e)
-        }), 500
+        except Exception as e:
+            return jsonify({
+                "signal": "WAIT",
+                "confidence": 0,
+                "error": str(e)
+            }), 500
 
 
 if __name__ == "__main__":
